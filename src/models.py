@@ -21,7 +21,6 @@ class User(db.Model):
             "email": self.email,
             "password": self.password,
             "is_active": self.is_active
-            
         }
 
 class People(db.Model):
@@ -128,7 +127,7 @@ class Favorites(db.Model):
     id = db.Column(Integer, primary_key=True)
     user_id = db.Column(Integer, ForeignKey('user.id'))
     people_id = db.Column(Integer, ForeignKey('people.id'))
-    planet_id = db.Column(Integer, ForeignKey('planets.id'))
+    planet_id = db.Column(Integer, ForeignKey('planet.id'))
     starships_id = db.Column(Integer, ForeignKey('starships.id'))
    
     def __repr__(self):
@@ -138,5 +137,5 @@ class Favorites(db.Model):
         return {
             "id": self.id,
             "email": self.email,
-            # do not serialize the password, its a security breach
+           
         }
