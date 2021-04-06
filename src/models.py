@@ -17,11 +17,14 @@ class User(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "nickname": self.nickname,
             "email": self.email,
-            # do not serialize the password, its a security breach
+            "password": self.password,
+            "is_active": self.is_active
+            
         }
 
-class People(Base):
+class People(db.Model):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(String(250), nullable=False)
     height = db.Column(Integer, nullable=False)
@@ -34,12 +37,20 @@ class People(Base):
     planet_id = db.Column(Integer, nullable=False)
 
 def __repr__(self):
-        return '<User %r>' % self.username
+        return '<People %r>' % self.name
 
     def serialize(self):
         return {
             "id": self.id,
-            "email": self.email,
+            "name": self.name,
+            "height": self.height,
+            "mass": self.mass,
+            "hair_color": self.hair_color,
+            "skin_color": self.skin_color,
+            "birth_year": self.birth_year,
+            "gender": self.gender,
+            "home_world": self.home_world,
+            "planet_id": self.planet_id
         }
 
 class Planet(db.Model):
@@ -56,16 +67,25 @@ class Planet(db.Model):
     description = db.Column(db.String(250), nullable=False)
 
 def __repr__(self):
-        return '<User %r>' % self.username
+        return '<Planet %r>' % self.username
 
     def serialize(self):
         return {
             "id": self.id,
-            "email": self.email,
-            # do not serialize the password, its a security breach
+            "name": self.name,
+            "diameter": self.diameter,
+            "rotation_period": self.rotation_period,
+            "orbital_period": self.orbital_period,
+            "gravity": self.gravity
+            "population": self.population,
+            "climate": self.climate,
+            "terrain": self.terrain,
+            "surface_water": self.surface_water,
+            "description": self.description
+            
        }
 
-class Starships(Base):
+class Starships(db.Model):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(String(250), nullable=False)
     model = db.Column(String(250), nullable=False)
@@ -83,16 +103,28 @@ class Starships(Base):
     pilots = db.Column(Integer, nullable=False)
 
 def __repr__(self):
-        return '<User %r>' % self.username
+        return '<Starships %r>' % self.username
 
     def serialize(self):
         return {
             "id": self.id,
-            "email": self.email,
-            # do not serialize the password, its a security breach
-        }
+            "name": self.name,
+            "model": self.model,
+            "manufacturer": self.manufacturer,
+            "cost_in_credits": self.cost_in_credits,
+            "lenght": self.lenght,
+            "max_atmospheric_speed": self.max_atmospheric_speed,
+            "crew": self.crew,
+            "passengers": self.passengers,
+            "cargo_capacity": self.cargo_capacity,
+            "consumables": self.consumables,
+            "hyperdrive_rating": self.hyperdrive_rating,
+            "MGLT": self.MGLT,
+            "starship_class": self.starship_class,
+            "pilots": self.pilots
+         }
 
-class Favorites(Base):
+class Favorites(db.Model):
     id = db.Column(Integer, primary_key=True)
     user_id = db.Column(Integer, ForeignKey('user.id'))
     people_id = db.Column(Integer, ForeignKey('people.id'))
@@ -100,7 +132,7 @@ class Favorites(Base):
     starships_id = db.Column(Integer, ForeignKey('starships.id'))
    
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '<Favorites %r>' % self.username
 
     def serialize(self):
         return {
