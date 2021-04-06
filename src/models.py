@@ -21,6 +21,27 @@ class User(db.Model):
             # do not serialize the password, its a security breach
         }
 
+class People(Base):
+    id = db.Column(Integer, primary_key=True)
+    name = db.Column(String(250), nullable=False)
+    height = db.Column(Integer, nullable=False)
+    mass = db.Column(Integer, nullable=False)
+    hair_color = db.Column(String(250), nullable=False)
+    skin_color = db.Column(String(250), nullable=False)
+    birth_year = db.Column(Integer, nullable=False)
+    gender = db.Column(String(250), nullable=False)
+    home_world = db.Column(String(250), nullable=False)
+    planet_id = db.Column(Integer, nullable=False)
+
+def __repr__(self):
+        return '<User %r>' % self.username
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "email": self.email,
+        }
+
 class Planet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
@@ -43,16 +64,47 @@ def __repr__(self):
             "email": self.email,
             # do not serialize the password, its a security breach
        }
-#nueva clase
-class People(Base):
-    __tablename__ = 'people'
+
+class Starships(Base):
     id = db.Column(Integer, primary_key=True)
     name = db.Column(String(250), nullable=False)
-    height = db.Column(Integer, nullable=False)
-    mass = db.Column(Integer, nullable=False)
-    hair_color = db.Column(String(250), nullable=False)
-    skin_color = db.Column(String(250), nullable=False)
-    birth_year = db.Column(Integer, nullable=False)
-    gender = db.Column(String(250), nullable=False)
-    home_world = db.Column(String(250), nullable=False)
-    planet_id = db.Column(Integer, nullable=False)
+    model = db.Column(String(250), nullable=False)
+    manufacturer = db.Column(String(250), nullable=False)
+    cost_in_credits = db.Column(Integer, nullable=False)
+    lenght = db.Column(Integer, nullable=False)
+    max_atmospheric_speed = db.Column(Integer, nullable=False)
+    crew = db.Column(String(250), nullable=False)
+    passengers = db.Column(Integer, nullable=False)
+    cargo_capacity = db.Column(Integer, nullable=False)
+    consumables = db.Column(String(250), nullable=False)
+    hyperdrive_rating = db.Column(Integer, nullable=False)
+    MGLT = db.Column(Integer, nullable=False)
+    starship_class = db.Column(String(250), nullable=False)
+    pilots = db.Column(Integer, nullable=False)
+
+def __repr__(self):
+        return '<User %r>' % self.username
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "email": self.email,
+            # do not serialize the password, its a security breach
+        }
+
+class Favorites(Base):
+    id = db.Column(Integer, primary_key=True)
+    user_id = db.Column(Integer, ForeignKey('user.id'))
+    people_id = db.Column(Integer, ForeignKey('people.id'))
+    planet_id = db.Column(Integer, ForeignKey('planets.id'))
+    starships_id = db.Column(Integer, ForeignKey('starships.id'))
+   
+    def __repr__(self):
+        return '<User %r>' % self.username
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "email": self.email,
+            # do not serialize the password, its a security breach
+        }
