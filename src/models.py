@@ -6,10 +6,10 @@ db = SQLAlchemy()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    nickname = db.Column(String(250), nullable=False)
-    email = db.Column(db.String(120), nullable=False)
-    password = db.Column(db.String(80), nullable=False)
-    is_active = db.Column(db.Boolean(), nullable=False)
+    nickname = db.Column(String(250), unique=False, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(80), unique=False, nullable=False)
+    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     
     def __repr__(self):
         return '<User %r>' % self.username
@@ -25,15 +25,15 @@ class User(db.Model):
 
 class People(db.Model):
     id = db.Column(Integer, primary_key=True)
-    name = db.Column(String(250), nullable=False)
-    height = db.Column(Integer, nullable=False)
-    mass = db.Column(Integer, nullable=False)
-    hair_color = db.Column(String(250), nullable=False)
-    skin_color = db.Column(String(250), nullable=False)
-    birth_year = db.Column(Integer, nullable=False)
-    gender = db.Column(String(250), nullable=False)
-    home_world = db.Column(String(250), nullable=False)
-    planet_id = db.Column(Integer, nullable=False)
+    name = db.Column(String(250), unique=False, nullable=False)
+    height = db.Column(Integer, unique=False, nullable=False)
+    mass = db.Column(Integer, unique=False, nullable=False)
+    hair_color = db.Column(String(250), unique=False, nullable=False)
+    skin_color = db.Column(String(250), unique=False, nullable=False)
+    birth_year = db.Column(Integer, unique=False, nullable=False)
+    gender = db.Column(String(250), unique=False, nullable=False)
+    home_world = db.Column(String(250), unique=False, nullable=False)
+    planet_id = db.Column(Integer, unique=False, nullable=False)
 
     def __repr__(self):
         return '<People %r>' % self.name
@@ -54,16 +54,16 @@ class People(db.Model):
 
 class Planet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(250), nullable=False)
-    diameter = db.Column(db.Integer, nullable=False)
-    rotation_period = db.Column(db.Integer, nullable=False)
-    orbital_period = db.Column(db.Integer, nullable=False)
-    gravity = db.Column(db.String(250), nullable=False)
-    population = db.Column(db.Integer, nullable=False)
-    climate = db.Column(db.String(250), nullable=False)
-    terrain = db.Column(db.String(250), nullable=False)
-    surface_water = db.Column(db.Integer, nullable=False)
-    description = db.Column(db.String(250), nullable=False)
+    name = db.Column(db.String(250), unique=False, nullable=False)
+    diameter = db.Column(db.Integer, unique=False, nullable=False)
+    rotation_period = db.Column(db.Integer, unique=False, nullable=False)
+    orbital_period = db.Column(db.Integer, unique=False, nullable=False)
+    gravity = db.Column(db.String(250), unique=False, nullable=False)
+    population = db.Column(db.Integer, unique=False, nullable=False)
+    climate = db.Column(db.String(250), unique=False, nullable=False)
+    terrain = db.Column(db.String(250), unique=False, nullable=False)
+    surface_water = db.Column(db.Integer, unique=False, nullable=False)
+    description = db.Column(db.String(250), unique=False, nullable=False)
 
     def __repr__(self):
         return '<Planet %r>' % self.username
@@ -85,20 +85,20 @@ class Planet(db.Model):
 
 class Starships(db.Model):
     id = db.Column(Integer, primary_key=True)
-    name = db.Column(String(250), nullable=False)
-    model = db.Column(String(250), nullable=False)
-    manufacturer = db.Column(String(250), nullable=False)
-    cost_in_credits = db.Column(Integer, nullable=False)
-    lenght = db.Column(Integer, nullable=False)
-    max_atmospheric_speed = db.Column(Integer, nullable=False)
-    crew = db.Column(String(250), nullable=False)
-    passengers = db.Column(Integer, nullable=False)
-    cargo_capacity = db.Column(Integer, nullable=False)
-    consumables = db.Column(String(250), nullable=False)
-    hyperdrive_rating = db.Column(Integer, nullable=False)
-    MGLT = db.Column(Integer, nullable=False)
-    starship_class = db.Column(String(250), nullable=False)
-    pilots = db.Column(Integer, nullable=False)
+    name = db.Column(String(250), unique=False, nullable=False)
+    model = db.Column(String(250), unique=False, nullable=False)
+    manufacturer = db.Column(String(250), unique=False, nullable=False)
+    cost_in_credits = db.Column(Integer, unique=False, nullable=False)
+    lenght = db.Column(Integer, unique=False, nullable=False)
+    max_atmospheric_speed = db.Column(Integer, unique=False, nullable=False)
+    crew = db.Column(String(250), unique=False, nullable=False)
+    passengers = db.Column(Integer, unique=False, nullable=False)
+    cargo_capacity = db.Column(Integer, unique=False, nullable=False)
+    consumables = db.Column(String(250), unique=False, nullable=False)
+    hyperdrive_rating = db.Column(Integer, unique=False, nullable=False)
+    MGLT = db.Column(Integer, unique=False, nullable=False)
+    starship_class = db.Column(String(250), unique=False, nullable=False)
+    pilots = db.Column(Integer, unique=False, nullable=False)
 
     def __repr__(self):
         return '<Starships %r>' % self.username
