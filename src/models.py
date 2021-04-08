@@ -24,16 +24,16 @@ class User(db.Model):
         }
 
 class People(db.Model):
-    id = db.Column(Integer, primary_key=True)
-    name = db.Column(String(250), unique=False, nullable=False)
-    height = db.Column(Integer, unique=False, nullable=False)
-    mass = db.Column(Integer, unique=False, nullable=False)
-    hair_color = db.Column(String(250), unique=False, nullable=False)
-    skin_color = db.Column(String(250), unique=False, nullable=False)
-    birth_year = db.Column(Integer, unique=False, nullable=False)
-    gender = db.Column(String(250), unique=False, nullable=False)
-    home_world = db.Column(String(250), unique=False, nullable=False)
-    planet_id = db.Column(Integer, unique=False, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(250), unique=False, nullable=False)
+    height = db.Column(db.Integer, unique=False, nullable=False)
+    mass = db.Column(db.Integer, unique=False, nullable=False)
+    hair_color = db.Column(db.String(250), unique=False, nullable=False)
+    skin_color = db.Column(db.String(250), unique=False, nullable=False)
+    birth_year = db.Column(db.Integer, unique=False, nullable=False)
+    gender = db.Column(db.String(250), unique=False, nullable=False)
+    home_world = db.Column(db.String(250), unique=False, nullable=False)
+    planet_id = db.Column(db.Integer, unique=False, nullable=False)
 
     def __repr__(self):
         return '<People %r>' % self.name
@@ -75,7 +75,7 @@ class Planet(db.Model):
             "diameter": self.diameter,
             "rotation_period": self.rotation_period,
             "orbital_period": self.orbital_period,
-            "gravity": self.gravity
+            "gravity": self.gravity,
             "population": self.population,
             "climate": self.climate,
             "terrain": self.terrain,
@@ -84,21 +84,21 @@ class Planet(db.Model):
         }
 
 class Starships(db.Model):
-    id = db.Column(Integer, primary_key=True)
-    name = db.Column(String(250), unique=False, nullable=False)
-    model = db.Column(String(250), unique=False, nullable=False)
-    manufacturer = db.Column(String(250), unique=False, nullable=False)
-    cost_in_credits = db.Column(Integer, unique=False, nullable=False)
-    lenght = db.Column(Integer, unique=False, nullable=False)
-    max_atmospheric_speed = db.Column(Integer, unique=False, nullable=False)
-    crew = db.Column(String(250), unique=False, nullable=False)
-    passengers = db.Column(Integer, unique=False, nullable=False)
-    cargo_capacity = db.Column(Integer, unique=False, nullable=False)
-    consumables = db.Column(String(250), unique=False, nullable=False)
-    hyperdrive_rating = db.Column(Integer, unique=False, nullable=False)
-    MGLT = db.Column(Integer, unique=False, nullable=False)
-    starship_class = db.Column(String(250), unique=False, nullable=False)
-    pilots = db.Column(Integer, unique=False, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(250), unique=False, nullable=False)
+    model = db.Column(db.String(250), unique=False, nullable=False)
+    manufacturer = db.Column(db.String(250), unique=False, nullable=False)
+    cost_in_credits = db.Column(db.Integer, unique=False, nullable=False)
+    lenght = db.Column(db.Integer, unique=False, nullable=False)
+    max_atmospheric_speed = db.Column(db.Integer, unique=False, nullable=False)
+    crew = db.Column(db.String(250), unique=False, nullable=False)
+    passengers = db.Column(db.Integer, unique=False, nullable=False)
+    cargo_capacity = db.Column(db.Integer, unique=False, nullable=False)
+    consumables = db.Column(db.String(250), unique=False, nullable=False)
+    hyperdrive_rating = db.Column(db.Integer, unique=False, nullable=False)
+    MGLT = db.Column(db.Integer, unique=False, nullable=False)
+    starship_class = db.Column(db.String(250), unique=False, nullable=False)
+    pilots = db.Column(db.Integer, unique=False, nullable=False)
 
     def __repr__(self):
         return '<Starships %r>' % self.username
@@ -122,18 +122,19 @@ class Starships(db.Model):
             "pilots": self.pilots,
          }
 
-#class Favorites(db.Model):
- #  user_id = db.Column(Integer, ForeignKey('user.id'))
- #   people_id = db.Column(Integer, ForeignKey('people.id'))
- #   planet_id = db.Column(Integer, ForeignKey('planet.id'))
- #   starships_id = db.Column(Integer, ForeignKey('starships.id'))
+class Favorites(db.Model):
+    user_id = db.Column(db.Integer, unique=False, nullable=False)
+    people_id = db.Column(db.Integer, unique=False, nullable=False)
+    planet_id = db.Column(db.Integer, unique=False, nullable=False)
+    starships_id = db.Column(db.Integer, unique=False, nullable=False)
    
-  #  def __repr__(self):
-   #     return '<Favorites %r>' % self.username
+    def __repr__(self):
+        return '<Favorites %r>' % self.username
 
-  #  def serialize(self):
-  #      return {
-   #         "id": self.id,
-  #          "email": self.email,
-           
-   #     }
+    def serialize(self):
+        return {
+            "user_id": self.id,
+            "people_id": self.people_id,
+            "planet_id": self.planet_id,
+            "starships_id": self.starships_id,
+        }
