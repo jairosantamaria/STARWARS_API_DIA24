@@ -11,6 +11,7 @@ class User(db.Model):
     email = db.Column(db.String(120), nullable=False)
     password = db.Column(db.String(80), nullable=False)
     is_active = db.Column(db.Boolean(), nullable=False)
+    # favorites = db.relationship('Favorites', lazy=True)
     
     def __repr__(self):
         return '<User %r>' % self.email
@@ -36,6 +37,7 @@ class People(db.Model):
     gender = db.Column(db.String(250), nullable=False)
     home_world = db.Column(db.String(250), nullable=False)
     planet_id = db.Column(db.Integer, nullable=False)
+    # favorites = db.relationship('Favorites', lazy=True)
 
     def __repr__(self):
         return '<People %r>' % self.name
@@ -67,10 +69,10 @@ class Planet(db.Model):
     terrain = db.Column(db.String(250), nullable=False)
     surface_water = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String(250), nullable=False)
-
+    # favorites = db.relationship('Favorites', lazy=True)
 
     def __repr__(self):
-        return '<Planet %r>' % self.username
+        return '<Planet %r>' % self.name
 
     def serialize(self):
         return {
@@ -86,13 +88,17 @@ class Planet(db.Model):
             "surface_water": self.surface_water,
             "description": self.description,
         }
+
 class Favorites(db.Model):
     __tablename__ ="favorites"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     people_id = db.Column(db.Integer, db.ForeignKey('people.id'))
     planet_id = db.Column(db.Integer, db.ForeignKey('planet.id'))
-   
+    user = db.relationship('User')
+    people = db.relationship('People')
+    planet = db.relationship('Planet')
+
     def __repr__(self):
         return '<Favorites %r>' % self.id
 

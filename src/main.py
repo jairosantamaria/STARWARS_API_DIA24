@@ -43,12 +43,16 @@ def handle_hello():
 #endpoint People
 @app.route('/people', methods=['GET'])
 def handle_people():
+    # get all the people
+    people_query = People.query.all()
 
-    response_body = {
-        "msg": "Hello, PEOPLE this is your GET /user response "
-    }
+    # map the results and your list of people  inside of the all_people variable
+    all_people = list(map(lambda x: x.serialize(), people_query))
+    # response_body = {
+    #     "msg": "Hello, PEOPLE this is your GET /user response "
+    # }
 
-    return jsonify(response_body), 200    
+    return jsonify(all_people), 200    
 
 #endpoint Planet
 @app.route('/planet', methods=['GET'])
