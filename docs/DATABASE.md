@@ -113,7 +113,8 @@ class Child(db.Model):
 ```
 
 ## MANY to MANY relationship
-Many to Many adds an association table between two classes. The association table is indicated by the secondary argument to relationship(). Usually, the Table uses the MetaData object associated with the declarative base class, so that the ForeignKey directives can locate the remote tables with which to link:
+Many to Many adds an association table between two classes. The association table is indicated by the secondary argument to relationship(). 
+Usually, the Table uses the MetaData object associated with the declarative base class, so that the ForeignKey directives can locate the remote tables with which to link:
 
 ```py
 association_table = Table('association', Base.metadata,

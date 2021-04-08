@@ -1,6 +1,7 @@
 # How to reset your migrations?
 
-Sometimes the migration folder can get messed up, its really hard to fix some of the issues and, since we are still in development, it makes sense to reset the entire database and migrations.
+Sometimes the migration folder can get messed up, its really hard to fix some of the issues and, since we are 
+still in development, it makes sense to reset the entire database and migrations.
 
 ## To reset the migrations carefully follow this commands:
 

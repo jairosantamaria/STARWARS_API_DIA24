@@ -5,6 +5,7 @@ from sqlalchemy.orm import relationship
 db = SQLAlchemy()
 
 class User(db.Model):
+    __tablename__ ="user"
     id = db.Column(db.Integer, primary_key=True)
     nickname = db.Column(db.String(250), nullable=False)
     email = db.Column(db.String(120), nullable=False)
@@ -24,6 +25,7 @@ class User(db.Model):
         }
 
 class People(db.Model):
+    __tablename__ ="people"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
     height = db.Column(db.Integer, nullable=False)
@@ -53,6 +55,7 @@ class People(db.Model):
         }
 
 class Planet(db.Model):
+    __tablename__ ="planet"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
     diameter = db.Column(db.Integer, nullable=False)
@@ -84,10 +87,11 @@ class Planet(db.Model):
             "description": self.description,
         }
 class Favorites(db.Model):
+    __tablename__ ="favorites"
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('User.id'))
-    people_id = db.Column(db.Integer, db.ForeignKey('People.id'))
-    planet_id = db.Column(db.Integer, db.ForeignKey('Planet.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    people_id = db.Column(db.Integer, db.ForeignKey('people.id'))
+    planet_id = db.Column(db.Integer, db.ForeignKey('planet.id'))
    
     def __repr__(self):
         return '<Favorites %r>' % self.id
