@@ -33,41 +33,49 @@ def sitemap():
 #endpoint User
 @app.route('/user', methods=['GET'])
 def handle_hello():
-
-    response_body = {
-        "msg": "Hello, USERS this is your GET /user response "
-    }
-
+    
+    people_query = User.query.all()
+    all_people = list(map(lambda x: x.serialize(), user_query))
     return jsonify(response_body), 200
+
+ @app.route('/user', methods=['POST'])
+ def handle_hello_post():
+    
+    request_body_user = request.get_json()
+    user1 = User(nickname=request_body_user["nickname"], email=request_body_user["email"], password=request_body_user["password"])
+    db.session.add(user1)
+    db.session.commit()
+    return jsonify(request_body_user), 200   
+
+ @app.route('/user/<int:user_id>', methods=['DELETE'])
+ def delete_user(user_id):
+    user1 = User.query.get(user_id)
+    if user1 is None:
+        raise APIException('User not found', status_code=404)
+    db.session.delet(user1)
+    db.session.commit()
+    return jsonify("Hecho"), 200
 
 #endpoint People
 @app.route('/people', methods=['GET'])
 def handle_people():
-    # get all the people
+    
     people_query = People.query.all()
-
-    # map the results and your list of people  inside of the all_people variable
     all_people = list(map(lambda x: x.serialize(), people_query))
-    # response_body = {
-    #     "msg": "Hello, PEOPLE this is your GET /user response "
-    # }
-
     return jsonify(all_people), 200    
 
 #endpoint Planet
 @app.route('/planet', methods=['GET'])
 def handle_planet():
 
-    response_body = {
-        "msg": "Hello, PLANET this is your GET /user response "
-    }
-
+    people_query = Planet.query.all()
+    all_people = list(map(lambda x: x.serialize(), planet_query))
     return jsonify(response_body), 200
 
 #endpoint Starships
 @app.route('/starships', methods=['GET'])
 def handle_starships():
-
+    
     response_body = {
         "msg": "Hello, STARSHIPS this is your GET /user response "
     }
