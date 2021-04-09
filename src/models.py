@@ -11,8 +11,7 @@ class User(db.Model):
     email = db.Column(db.String(120), nullable=False)
     password = db.Column(db.String(80), nullable=False)
     is_active = db.Column(db.Boolean(), nullable=True)
-    # favorites = db.relationship('Favorites', lazy=True)
-    
+       
     def __repr__(self):
         return '<User %r>' % self.email
 

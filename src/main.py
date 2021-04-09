@@ -34,12 +34,12 @@ def sitemap():
 @app.route('/user', methods=['GET'])
 def handle_hello():
     
-    people_query = User.query.all()
-    all_people = list(map(lambda x: x.serialize(), user_query))
-    return jsonify(response_body), 200
+    users = User.query.all()
+    all_user = list(map(lambda x: x.serialize(), users))
+    return jsonify(all_users), 200
 
- @app.route('/user', methods=['POST'])
- def handle_hello_post():
+@app.route('/user', methods=['POST'])
+def handle_hello_post():
     
     request_body_user = request.get_json()
     user1 = User(nickname=request_body_user["nickname"], email=request_body_user["email"], password=request_body_user["password"])
@@ -47,8 +47,8 @@ def handle_hello():
     db.session.commit()
     return jsonify(request_body_user), 200   
 
- @app.route('/user/<int:user_id>', methods=['DELETE'])
- def delete_user(user_id):
+@app.route('/user/<int:user_id>', methods=['DELETE'])
+def delete_user(user_id):
     user1 = User.query.get(user_id)
     if user1 is None:
         raise APIException('User not found', status_code=404)
@@ -60,27 +60,17 @@ def handle_hello():
 @app.route('/people', methods=['GET'])
 def handle_people():
     
-    people_query = People.query.all()
-    all_people = list(map(lambda x: x.serialize(), people_query))
-    return jsonify(all_people), 200    
+    peoplex = People.query.all()
+    all_people = list(map(lambda x: x.serialize(), peoplex))
+    return jsonify(all_peoplex), 200   
 
 #endpoint Planet
 @app.route('/planet', methods=['GET'])
 def handle_planet():
 
-    people_query = Planet.query.all()
-    all_people = list(map(lambda x: x.serialize(), planet_query))
-    return jsonify(response_body), 200
-
-#endpoint Starships
-@app.route('/starships', methods=['GET'])
-def handle_starships():
-    
-    response_body = {
-        "msg": "Hello, STARSHIPS this is your GET /user response "
-    }
-
-    return jsonify(response_body), 200
+    planets = Planet.query.all()
+    all_planet = list(map(lambda x: x.serialize(), planets))
+    return jsonify(all_planets), 200
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
