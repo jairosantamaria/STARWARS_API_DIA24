@@ -30,7 +30,7 @@ def handle_invalid_usage(error):
 def sitemap():
     return generate_sitemap(app)
 
-#endpoint User
+#endpoint User____________________________________________________________________
 @app.route('/user', methods=['GET'])
 def get_user():
     
@@ -38,7 +38,13 @@ def get_user():
     all_user = list(map(lambda x: x.serialize(), users))
     return jsonify(all_user), 200
 
-#endpoint People
+@app.route('/user/<int:id>', methods=['GET'])
+def get_userid(id):
+    userid = User.query.get(id)
+    result = userid.serialize()
+    return jsonify(result), 200
+
+#endpoint People__________________________________________________________________
 @app.route('/people', methods=['GET'])
 def handle_people():
     
@@ -46,7 +52,7 @@ def handle_people():
     all_people = list(map(lambda x: x.serialize(), peoplex))
     return jsonify(all_peoplex), 200   
 
-#endpoint Planet
+#endpoint Planet_________________________________________________________________
 @app.route('/planet', methods=['GET'])
 def handle_planet():
 
@@ -54,7 +60,13 @@ def handle_planet():
     all_planet = list(map(lambda x: x.serialize(), planets))
     return jsonify(all_planets), 200
 
-# this only runs if `$ python src/main.py` is executed
+@app.route('/planet/<int:id>', methods=['GET'])
+def get_planetid(id):
+    planetid = User.query.get(id)
+    result = planetid.serialize()
+    return jsonify(result), 200
+
+# this only runs if `$ python src/main.py` is executed __________________________
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3000))
     app.run(host='0.0.0.0', port=PORT, debug=False)
