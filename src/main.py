@@ -32,29 +32,11 @@ def sitemap():
 
 #endpoint User
 @app.route('/user', methods=['GET'])
-def handle_hello():
+def get_user():
     
     users = User.query.all()
     all_user = list(map(lambda x: x.serialize(), users))
-    return jsonify(all_users), 200
-
-@app.route('/user', methods=['POST'])
-def handle_hello_post():
-    
-    request_body_user = request.get_json()
-    user1 = User(nickname=request_body_user["nickname"], email=request_body_user["email"], password=request_body_user["password"])
-    db.session.add(user1)
-    db.session.commit()
-    return jsonify(request_body_user), 200   
-
-@app.route('/user/<int:user_id>', methods=['DELETE'])
-def delete_user(user_id):
-    user1 = User.query.get(user_id)
-    if user1 is None:
-        raise APIException('User not found', status_code=404)
-    db.session.delet(user1)
-    db.session.commit()
-    return jsonify("Hecho"), 200
+    return jsonify(all_user), 200
 
 #endpoint People
 @app.route('/people', methods=['GET'])
