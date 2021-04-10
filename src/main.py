@@ -56,15 +56,15 @@ def handle_people():
 @app.route('/planet', methods=['GET'])
 def handle_planet():
 
-    planets = Planet.query.all()
-    all_planet = list(map(lambda x: x.serialize(), planets))
-    return jsonify(all_planets), 200
+    planet = Planet.query.all()
+    all_planet = list(map(lambda x: x.serialize(), planet))
+    return jsonify(all_planet), 200
 
 @app.route('/planet/<int:id>', methods=['GET'])
 def get_planetid(id):
     planetid = User.query.get(id)
-    result = planetid.serialize()
-    return jsonify(result), 200
+    resultt = planetid.serialize()
+    return jsonify(resultt), 200
 
 # this only runs if `$ python src/main.py` is executed __________________________
 if __name__ == '__main__':
