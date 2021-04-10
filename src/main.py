@@ -48,9 +48,15 @@ def get_userid(id):
 @app.route('/people', methods=['GET'])
 def handle_people():
     
-    peoplex = People.query.all()
-    all_people = list(map(lambda x: x.serialize(), peoplex))
-    return jsonify(all_peoplex), 200   
+    people = People.query.all()
+    all_people = list(map(lambda x: x.serialize(), people))
+    return jsonify(all_people), 200   
+
+@app.route('/people/<int:id>', methods=['GET'])
+def get_peopleid(id):
+    peopleid = User.query.get(id)
+    result = peopleid.serialize()
+    return jsonify(result), 200
 
 #endpoint Planet_________________________________________________________________
 @app.route('/planet', methods=['GET'])
@@ -63,8 +69,13 @@ def handle_planet():
 @app.route('/planet/<int:id>', methods=['GET'])
 def get_planetid(id):
     planetid = User.query.get(id)
-    resultt = planetid.serialize()
-    return jsonify(resultt), 200
+    result = planetid.serialize()
+    return jsonify(result), 200
+
+
+#endpoint Favorites_________________________________________________________________
+
+
 
 # this only runs if `$ python src/main.py` is executed __________________________
 if __name__ == '__main__':
